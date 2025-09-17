@@ -1,0 +1,78 @@
+# data augmentation
+dataset:
+  common:
+    NAME: SemanticKITTI
+    data_root: data/SemanticKITTI/dataset 
+    voxel_size: 0.06
+  train:
+    split: train
+    voxel_max: 88000
+    loop: 1
+    presample: False
+  val:
+    split: val
+    voxel_max: null
+    presample: True
+  test:
+    split: val
+    voxel_max: null
+    presample: False 
+
+feature_keys: pos,heights
+num_classes: 19
+batch_size: 12
+val_batch_size: 1
+
+dataloader:
+  num_workers: 32 #6
+
+datatransforms:
+  train: [RandomRotateZ, RandomScale, RandomFlip, RandomJitter]
+  test: [PointsToTensor] 
+  kwargs:
+    gravity_dim: 2
+    rotate_dim: 2
+    scale: [0.9, 1.1]
+    jitter_sigma: 0.008
+    jitter_clip: 0.03
+
+# ---------------------------------------------------------------------------- #
+# Training cfgs
+# ---------------------------------------------------------------------------- #
+val_fn: validate
+ignore_index: -1
+epochs: 50
+
+cls_weighed_loss: False
+
+criterion_args:
+  NAME: CrossEntropy
+  label_smoothing: 0.0
+  ignore_index: -1
+
+optimizer:
+ NAME: 'adamw'  # performs 1 point better than adam
+ weight_decay: 1.0e-4
+
+lr: 0.001
+min_lr: null
+
+sched: multistep
+decay_epochs: [70, 90]
+decay_rate: 0.1
+warmup_epochs: 0
+
+grad_norm_clip: 10
+use_voting: False
+# ---------------------------------------------------------------------------- #
+# io and misc
+# ---------------------------------------------------------------------------- #
+log_dir: 'semantickitti'
+save_freq: -1 # save epoch every xxx epochs, -1 only save last and best. 
+val_freq: 1
+
+wandb:
+  project: PointMetaBase-SemanticKITTI
+
+# save_pred: True
+# visualize: True
