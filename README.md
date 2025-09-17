@@ -51,7 +51,7 @@ CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, se
 # Run baseline
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l, pointmetabase-l].yaml wandb.use_wandb=False mode=test --pretrained_path [path]
 
-# Run with MDPS
+# Run with only MDPS
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l-mdps, pointmetabase-l-mdps].yaml wandb.use_wandb=False mode=test --pretrained_path [path]
 
 # Run with FastPoint
