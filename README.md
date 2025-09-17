@@ -9,10 +9,12 @@ Note:
 
    We recommend using CUDA 11.x; check your CUDA version by: `nvcc --version` before using the bash file;
 
+## Prepare Pretrained Models
+Model weights used in our experiments are available through Google Drive [link](https://drive.google.com/drive/folders/1obELZpNd6U5XEn08eHPK0tMDy_rzfj8H).
 
 ## Prepare Dataset
 
-### S3DIS
+#### S3DIS
 ```
 mkdir -p data/S3DIS/
 cd data/S3DIS
@@ -20,23 +22,19 @@ gdown https://drive.google.com/uc?id=1MX3ZCnwqyRztG1vFRiHkKTz68ZJeHS4Y
 tar -xvf s3disfull.tar
 ```
 
-### ScanNet
+#### ScanNet
 ```
 cd data
 gdown https://drive.google.com/uc?id=1uWlRPLXocqVbJxPvA2vcdQINaZzXf1z_
 tar -xvf ScanNet.tar
 ```
 
-### SemanticKITTI
+#### SemanticKITTI
 Download [SemanticKITTI](https://www.semantic-kitti.org/dataset.html#download) dataset.
 
 
-## Pretrained Models
-Model weights used in our experiments are available through Google Drive [link](https://drive.google.com/drive/folders/1obELZpNd6U5XEn08eHPK0tMDy_rzfj8H).
-
-
-## Inference Speed (val mode)
-### S3DIS, ScanNet, SemanticKITTI (PointVector, PointMetaBase)
+## Experiments
+#### Inference Speed (val mode)
 ```
 # Run baseline
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l, pointmetabase-l].yaml wandb.use_wandb=False mode=val --pretrained_path [path]
@@ -48,8 +46,7 @@ CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, se
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l-fastpoint, pointmetabase-l-fastpoint].yaml wandb.use_wandb=False mode=val --pretrained_path [path]
 ```
 
-## Model Accuracy (test mode)
-### S3DIS, ScanNet, SemanticKITTI (PointVector, PointMetaBase)
+#### Model Accuracy (test mode)
 ```
 # Run baseline
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l, pointmetabase-l].yaml wandb.use_wandb=False mode=test --pretrained_path [path]
@@ -62,7 +59,6 @@ CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, se
 ```
 
 ## Training Minimum Distance Curve Estimator
-### S3DIS Example
 We provide example training script for S3DIS estimator. Detailed hyperparameters for other datasets are explained in Appendix A.3.
 ```
 CUDA_VISIBLE_DEVICES=0 bash script/train_estimator.sh cfgs/s3dis/pointmetabase-l.yaml wandb.use_wandb=False
