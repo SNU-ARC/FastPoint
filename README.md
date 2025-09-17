@@ -31,7 +31,11 @@ tar -xvf ScanNet.tar
 Download [SemanticKITTI](https://www.semantic-kitti.org/dataset.html#download) dataset.
 
 
-## Testing Inference Speed (val mode)
+## Pretrained Models
+Model weights used in our experiments are available through Google Drive [link](https://drive.google.com/drive/folders/1obELZpNd6U5XEn08eHPK0tMDy_rzfj8H).
+
+
+## Inference Speed (val mode)
 ### S3DIS, ScanNet, SemanticKITTI (PointVector, PointMetaBase)
 ```
 # Run baseline
@@ -44,7 +48,7 @@ CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, se
 CUDA_VISIBLE_DEVICES=0 bash script/main_segmentation.sh cfgs/[s3dis, scannet, semantickitti]/[pointvector-l-fastpoint, pointmetabase-l-fastpoint].yaml wandb.use_wandb=False mode=val --pretrained_path [path]
 ```
 
-## Testing Model Accuracy (test mode)
+## Model Accuracy (test mode)
 ### S3DIS, ScanNet, SemanticKITTI (PointVector, PointMetaBase)
 ```
 # Run baseline
