@@ -186,10 +186,10 @@ def training(train_train_loader, train_val_loader, val_loader, cfg):
         
         # Choose loss function
         # Option 1: Mean Squared Error Loss
-        criterion = nn.MSELoss()
+        # criterion = nn.MSELoss()
         
         # Option 2: Mean Absolute Percentage Error Loss
-        # criterion = MAPELoss()
+        criterion = MAPELoss()
         
         # Option 3: Weighted Mean Squared Error Loss
         # criterion = WeightedMSELoss()
